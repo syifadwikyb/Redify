@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Redify</string>
+    <string name="home">Beranda</string>
+    <string name="save">Disimpan</string>
+    <string name="profile">Profil</string>
+    <string name="search">Cari</string>
+    <string name="footer">Copyright by Syifa Dwiky Basamala</string>
+</resources>
