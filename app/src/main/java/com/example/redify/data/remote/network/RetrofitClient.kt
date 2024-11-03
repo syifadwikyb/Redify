@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "https://www.googleapis.com/books/v1"
+    private const val BASE_URL = "https://www.googleapis.com/books/v1/"
 
     // Agar dapat dipanggil dimana saja
     val instance: ApiService by lazy {

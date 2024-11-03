@@ -9,10 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.redify.R
 import com.example.redify.adapters.HomeAdapter
-import com.example.redify.data.remote.network.RetrofitClient
-import com.example.redify.data.repository.EventRepository
 import com.example.redify.databinding.FragmentHomeBinding
-import com.example.redify.utils.ViewModelFactory
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding by viewBinding(FragmentHomeBinding::bind)
@@ -23,30 +20,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         setupRecyclerView()
+        getEvent()
+        setupObservers()
     }
 
     private fun setupViewModel() {
-        val eventRepository = EventRepository(RetrofitClient.instance)
-        val factory = ViewModelFactory(eventRepository)
-        homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
+        homeViewModel = ViewModelProvider(requireActivity())[HomeViewModel::class.java]
     }
 
     private fun setupRecyclerView() {
         homeAdapter = HomeAdapter(listOf())
-        binding.recyclerVertical.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerVertical.adapter = homeAdapter
+        binding.rvBooks.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvBooks.adapter = homeAdapter
     }
 
     private fun getEvent() {
-        homeViewModel.getVerHor()
+        homeViewModel.getBooks()
     }
 
     private fun setupObservers() {
-        homeViewModel.homeVerHor.observe(viewLifecycleOwner) {
-            homeViewModel.updateData(it)
+        homeViewModel.homeBook.observe(viewLifecycleOwner) { listBook ->
+            homeAdapter.updateData(listBook)
         }
-        homeViewModel.exception.observe(viewLifecycleOwner) {
-            if (it) {
+        homeViewModel.exception.observe(viewLifecycleOwner) { error ->
+            if (error) {
                 Toast.makeText(requireContext(), "Tidak ada internet", Toast.LENGTH_SHORT).show()
                 homeViewModel.clearException()
             }
