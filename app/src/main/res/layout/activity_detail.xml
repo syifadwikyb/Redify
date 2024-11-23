@@ -33,13 +33,12 @@
             <ImageView
                 android:id="@+id/thumbnail"
                 android:layout_width="160dp"
-                android:layout_height="201dp"
+                android:layout_height="250dp"
                 android:paddingVertical="8dp"
                 android:src="@drawable/icon_hero"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/icons"
@@ -67,7 +66,7 @@
                     android:layout_marginHorizontal="8dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="4dp"
-                    android:src="@drawable/save_blue"
+                    android:src="@drawable/save_white"
                     app:layout_constraintStart_toEndOf="@id/share"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

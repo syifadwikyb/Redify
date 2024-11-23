@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.redify.data.local.LocalDatabase
+import com.example.redify.data.local.entity.Book
 import com.example.redify.data.remote.model.BookItem
 import com.example.redify.data.remote.network.RetrofitClient
 import com.example.redify.data.repository.BookRepository
@@ -21,6 +22,9 @@ class DetailViewModel (private val application: Application) : AndroidViewModel(
     private val _exception = MutableLiveData<Boolean>()
     val exception: MutableLiveData<Boolean> get() = _exception
 
+    private val _isSaved = MutableLiveData<Boolean>()
+    val isSaved: MutableLiveData<Boolean> get() = _isSaved
+
     fun getBookDetail(id: String) {
         viewModelScope.launch (Dispatchers.IO) {
             try {
@@ -30,6 +34,29 @@ class DetailViewModel (private val application: Application) : AndroidViewModel(
             } catch (e: Exception) {
                 _exception.postValue(true)
             }
+        }
+    }
+
+    fun isBookSaved(id: String) {
+        viewModelScope.launch (Dispatchers.IO) {
+            val isExist = repository.isBookExist(id)
+            if (isExist > 0) {
+                _isSaved.postValue(true)
+            } else {
+                _isSaved.postValue(false)
+            }
+        }
+    }
+
+    fun saveBook(book: Book) {
+        viewModelScope.launch (Dispatchers.IO) {
+            repository.insertBook(book)
+        }
+    }
+
+    fun deleteBook(id: String) {
+        viewModelScope.launch (Dispatchers.IO) {
+            repository.deleteBook(id)
         }
     }
 

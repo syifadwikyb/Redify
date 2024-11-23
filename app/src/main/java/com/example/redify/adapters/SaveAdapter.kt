@@ -37,10 +37,8 @@ class SaveAdapter (private var save: List<Book>) : RecyclerView.Adapter<SaveAdap
                 .centerCrop()
                 .into(itemBinding.thumbnail)
             itemBinding.title.text = book.title
-            itemBinding.author.text = book.author.joinToString(", ")
-            if (!book.price.isNullOrEmpty()) {
-                itemBinding.price.text = "Rp ${PriceFormat.thousandSeparator(book.price.toInt())}"
-            }
+            itemBinding.author.text = book.author
+            itemBinding.price.text = "Rp ${book.price?.let { PriceFormat.thousandSeparator(it.toDouble().toInt()) }}"
             itemBinding.publishedDate.text = book.publishedDate
 
             itemBinding.itemContainer.setOnClickListener {

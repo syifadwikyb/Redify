@@ -21,7 +21,7 @@ data class VolumeInfo(
     val title: String,
     val authors: List<String>?,
     val publisher: String?,
-    val publishedDate: String?,
+    val publishedDate: String,
     val description: String?,
     val industryIdentifiers: List<IndustryIdentifier>?,
     val readingModes: ReadingModes,
@@ -32,7 +32,7 @@ data class VolumeInfo(
     val allowAnonLogging: Boolean,
     val contentVersion: String,
     val panelizationSummary: PanelizationSummary?,
-    val imageLinks: ImageLinks?,
+    val imageLinks: ImageLinks,
     val language: String,
     val previewLink: String,
     val infoLink: String,
@@ -56,7 +56,7 @@ data class PanelizationSummary(
 
 data class ImageLinks(
     val smallThumbnail: String?,
-    val thumbnail: String?
+    val thumbnail: String
 )
 
 data class SaleInfo(

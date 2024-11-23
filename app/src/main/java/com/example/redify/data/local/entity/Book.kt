@@ -9,7 +9,7 @@ data class Book (
     val id: String,
     val thumbnail: String,
     val title: String,
-    val author: List<String>,
+    val author: String,
     val price: String?,
     val publishedDate: String
 )
